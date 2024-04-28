@@ -76,8 +76,8 @@ public class GameMain extends JPanel implements MouseListener{
 						
 				
 				
-				//TODO: set the default close operation of the frame to exit_on_close
-		            
+				// set the default close operation of the frame to exit_on_close
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		            
 				
 				frame.pack();             
 				frame.setLocationRelativeTo(null);
@@ -94,7 +94,7 @@ public class GameMain extends JPanel implements MouseListener{
 		board.paint(g);
 		
 		//set status bar message
-		if (currentState == GameState.Playing) {          
+		if (currentState == GameState.Playing) {      
 			statusBar.setForeground(Color.BLACK);          
 			if (currentPlayer == Player.Cross) {   
 			
@@ -148,7 +148,8 @@ public class GameMain extends JPanel implements MouseListener{
 			} else 
 				if (board.isDraw ()) {
 					
-				// TODO: set the currentstate to the draw gamestate
+					// Set the currentstate to the 'Draw' gamestate
+					currentState = GameState.Draw;
 
 			}
 			//otherwise no change to current state of playing
