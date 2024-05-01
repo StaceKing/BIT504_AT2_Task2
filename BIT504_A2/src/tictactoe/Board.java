@@ -36,7 +36,7 @@ public class Board {
 		for (int row = 0; row < GameMain.ROWS; ++row) {
 			for (int col = 0; col < GameMain.COLS; ++col) {
 
-				if(cells[row][col].content != Player.Empty) {
+				if(cells[row][col].content == Player.Empty) {
 					// If any of the cells' content in the board grid show Player.Empty it is not a draw.
 					draw = false;
 				}
@@ -55,7 +55,7 @@ public class Board {
 			return true;
 		
 		// check if player has 3-in-that-column
-		if(cells[playerCol][0].content == thePlayer && cells[playerCol][1].content == thePlayer && cells[playerCol][2].content == thePlayer )
+		if(cells[0][playerCol].content == thePlayer && cells[1][playerCol].content == thePlayer && cells[2][playerCol].content == thePlayer )
 			return true; 
 		
 		// 3-in-the-diagonal (left)
