@@ -40,7 +40,8 @@ public class GameMain extends JPanel implements MouseListener{
 	/** Constructor to setup the UI and game components on the panel */
 	public GameMain() {   
 		
-		// TODO: This JPanel fires a MouseEvent on MouseClicked so add required event listener to 'this'.          
+		// Event listener for the mouse clicks          
+	    addMouseListener(this);
 	    
 	    
 		// Setup the status bar (JLabel) to display status message       
@@ -73,9 +74,8 @@ public class GameMain extends JPanel implements MouseListener{
 				//create a main window to contain the panel
 				JFrame frame = new JFrame(TITLE);
 				
-				//TODO: create the new GameMain panel and add it to the frame
-						
-				
+				// Create the new GameMain panel and add it to the frame
+				frame.add(new GameMain());
 				
 				// set the default close operation of the frame to exit_on_close
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,14 +101,12 @@ public class GameMain extends JPanel implements MouseListener{
 			
 				// use the status bar to display the message "X"'s Turn
 				statusBar.setText("\"X\"'s Turn ...");
-
 				
 			} else {
 				
 				// use the status bar to display the message "O"'s Turn
 				statusBar.setText("\"O\"'s Turn ...");
 
-				
 			}
 			
 		} else if (currentState == GameState.Draw) {
@@ -199,7 +197,8 @@ public class GameMain extends JPanel implements MouseListener{
 			initGame();
 		}   
 		
-		//TODO: redraw the graphics on the UI          
+		// redraw the graphics on the UI          
+        repaint();
            
 	}
 		
