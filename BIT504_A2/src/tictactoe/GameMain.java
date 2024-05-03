@@ -52,7 +52,7 @@ public class GameMain extends JPanel implements MouseListener{
 		statusBar.setBackground(Color.LIGHT_GRAY);  
 		
 		//layout of the panel is in border layout
-		setLayout(new BorderLayout());       
+		setLayout(new BorderLayout());
 		add(statusBar, BorderLayout.SOUTH);
 		// account for statusBar height in overall height
 		setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT + 30));
@@ -86,6 +86,7 @@ public class GameMain extends JPanel implements MouseListener{
 	         }
 		 });
 	}
+	
 	/** Custom painting codes on this JPanel */
 	public void paintComponent(Graphics g) {
 		//fill background and set colour to white
@@ -122,54 +123,54 @@ public class GameMain extends JPanel implements MouseListener{
 	}
 		
 	
-	  /** Initialise the game-board contents and the current status of GameState and Player) */
-		public void initGame() {
-			for (int row = 0; row < ROWS; ++row) {
-				for (int col = 0; col < COLS; ++col) {
-					// all cells empty
-					board.cells[row][col].content = Player.Empty;
-				}
+    /** Initialise the game-board contents and the current status of GameState and Player) */
+	public void initGame() {
+		for (int row = 0; row < ROWS; ++row) {
+			for (int col = 0; col < COLS; ++col) {
+				// all cells empty
+				board.cells[row][col].content = Player.Empty;
 			}
-			 currentState = GameState.Playing;
-			 currentPlayer = Player.Cross;
 		}
+		currentState = GameState.Playing;
+		currentPlayer = Player.Cross;
+	}
 		
 		
-		/**After each turn check to see if the current player hasWon by putting their symbol in that position, 
-		 * If they have the GameState is set to won for that player
-		 * If no winner then isDraw is called to see if deadlock, if not GameState stays as PLAYING
-		 *   
-		 */
-		public void updateGame(Player thePlayer, int row, int col) {
+	/**After each turn check to see if the current player hasWon by putting their symbol in that position, 
+	 * If they have the GameState is set to won for that player
+	 * If no winner then isDraw is called to see if deadlock, if not GameState stays as PLAYING
+	 *   
+	 */
+	public void updateGame(Player thePlayer, int row, int col) {
+		
+		//check for win after play
+		if(board.hasWon(thePlayer, row, col)) {
 			
-			//check for win after play
-			if(board.hasWon(thePlayer, row, col)) {
-				
-				// check which player has won and update the currentstate to the appropriate gamestate for the winner
-				if(thePlayer == Player.Cross) {
-					currentState = GameState.Cross_won;
-				}
-				// if not Cross, player must be Nought
-				else {
-					currentState = GameState.Nought_won;
-				}
-
-				
-			} else 
-				if (board.isDraw ()) {
-					
-					// Set the currentstate to the 'Draw' gamestate
-					currentState = GameState.Draw;
-
+			// check which player has won and update the currentstate to the appropriate gamestate for the winner
+			if(thePlayer == Player.Cross) {
+				currentState = GameState.Cross_won;
 			}
-			//otherwise no change to current state of playing
+			// if not Cross, player must be Nought
+			else {
+				currentState = GameState.Nought_won;
+			}
+
+			
+		} else 
+			if (board.isDraw ()) {
+				
+				// Set the currentstate to the 'Draw' gamestate
+				currentState = GameState.Draw;
+
 		}
+		//otherwise no change to current state of playing
+	}
 		
 				
 	
-		/** Event handler for the mouse click on the JPanel. If selected cell is valid and Empty then current player is added to cell content.
-		 *  UpdateGame is called which will call the methods to check for winner or Draw. if none then GameState remains playing.
-		 *  If win or Draw then call is made to method that resets the game board.  Finally a call is made to refresh the canvas so that new symbol appears*/
+	/** Event handler for the mouse click on the JPanel. If selected cell is valid and Empty then current player is added to cell content.
+	 *  UpdateGame is called which will call the methods to check for winner or Draw. if none then GameState remains playing.
+	 *  If win or Draw then call is made to method that resets the game board.  Finally a call is made to refresh the canvas so that new symbol appears*/
 	
 	public void mouseClicked(MouseEvent e) {
 	    // get the coordinates of where the click event happened            
